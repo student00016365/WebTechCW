@@ -20,7 +20,7 @@ Documentation: This web application is designed to manage books, allowing users 
 
 Project structure: there is routes folder and routes.js file within the folder, there is views folder and all UI of the application inside it. There is app.js file, booksData.json file, gitignoe and others. I didn't create public folder because i did'nt use images i instead used links for that images also i didn't use any css styling since my application was created in bootstrap. I also didn't create controllers directory because i included all necessary logic and functions inside router.js for compatibility.
 
-LINK TO THE GITHUB REPO: 
+LINK TO THE GITHUB REPO: https://github.com/student00016365/WebTechCW
 
 
 LINK TO HOSTED APPLICATION: 
