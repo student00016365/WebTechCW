@@ -23,4 +23,4 @@ Project structure: there is routes folder and routes.js file within the folder, 
 LINK TO THE GITHUB REPO: https://github.com/student00016365/WebTechCW
 
 
-LINK TO HOSTED APPLICATION: 
+LINK TO HOSTED APPLICATION: https://zany-cyan-sea-urchin-cap.cyclic.app/
