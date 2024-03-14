@@ -1,0 +1,80 @@
+doctype html
+html
+    head
+        title Books
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3", crossorigin="anonymous")
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js", integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p", crossorigin="anonymous")
+    body
+        .container-fluid
+            .row
+                .col.p-0
+                    header
+                        nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+                            .container-fluid
+                                a.navbar-brand(href="/") Books
+                                button.navbar-toggler(type="button", data-bs-toggle="collapse", data-bs-target="#navbarSupportedContent", aria-controls="navbarSupportedContent", aria-expanded="false", aria-label="Toggle navigation")
+                                    span.navbar-toggler-icon
+                                #navbarSupportedContent.collapse.navbar-collapse
+                                    ul.navbar-nav.me-auto.mb-2.mb-lg-0
+                                        li.nav-item
+                                            a.nav-link(href="/add-book") Add Book
+                                    form.d-flex
+                                        input.form-control.me-2(type="text", placeholder="Search", aria-label="Search")
+                                        button.btn.btn-outline-success(type="submit") Search
+            .row.mt-4
+                .col-12.col-md-2
+                    .list-group
+                        a.list-group-item.list-group-item-action(href="/") Detektiv
+                        a.list-group-item.list-group-item-action.active(aria-current="true", href="#") Klassika
+                        a.list-group-item.list-group-item-action(href="/") Komediya
+                        a.list-group-item.list-group-item-action(href="/") Romantika
+                        a.list-group-item.list-group-item-action(href="/") Fantastika
+                .col-12.col-md-10.mt-4.mt-md-0
+                    .row
+                        each book, index in books
+                            .col-12.col-sm-6.col-lg-4.col-xl-3.mb-4
+                                .card
+                                    if book.picture
+                                        img.card-img-top(src=book.picture, alt=book.name + " cover")
+                                    else
+                                        img.card-img-top(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-JJJnBAG-vr5glOVZY0BasnxP0VWLM80aOg&usqp=CAU", alt="Default cover")
+                                    .card-body
+                                        h5.card-title= book.name
+                                        p.card-text= book.description
+                                        a.btn.btn-primary(href="/book/" + book.id) Read
+                                        a.ms-2.btn.btn-danger.delete(data-id=book.id onclick="deleteBook(this)") Delete
+                                        script.
+                                            function deleteBook(element) {
+                                                const bookId = element.getAttribute('data-id');
+                                                fetch('/book/' + bookId, {
+                                                    method: 'DELETE',
+                                                })
+                                                .then(response => {
+                                                    if (response.ok) {
+                                                        window.location.reload(); // Reload the page to reflect changes
+                                                    } else {
+                                                        alert('Failed to delete the book');
+                                                    }
+                                                })
+                                                .catch(error => console.error('Error:', error));
+                                                }
+                                        a.ms-2.btn.btn-outline-info(data-id=book.id href=`/edit-book/${book.id}`) Edit
+                    .row
+                        .col
+                            nav(aria-label="Page navigation example")
+                                ul.pagination
+                                    li.page-item
+                                        a.page-link(href="#", aria-label="Previous")
+                                            span(aria-hidden="true") «
+                                    li.page-item
+                                        a.page-link(href="#") 1
+                                    li.page-item.active
+                                        a.page-link(href="#") 2
+                                    li.page-item
+                                        a.page-link(href="#") 3
+                                    li.page-item
+                                        a.page-link(href="#", aria-label="Next")
+                                            span(aria-hidden="true") »
+            .row
+                .col.p-0
+                    footer.bg-dark.text-light.p-5 &copy; This web application was created to fulfill Web Technology module’s requirements and does not represent an actual company or service
